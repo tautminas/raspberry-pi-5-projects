@@ -6,32 +6,53 @@
 \usepackage{xcolor}
 \usepackage{tocloft}
 
-\title{Raspberry Pi 5 Projects Collection}
-\date{} % Prevents the date from appearing
+\title{Raspberry Pi 5 Projects}
+\date{}
 
-\hypersetup{hidelinks} % Removes red-colored links
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    urlcolor=red,
+    filecolor=green,
+    pdfborder={0 0 0},
+    citecolor=blue
+}
+
+\hypersetup{linkcolor=black}
 
 \begin{document}
 
 \maketitle
 
-\renewcommand{\cftsecleader}{\cftdotfill{\cftdotsep}} % Fixes TOC formatting
+\renewcommand{\cftsecleader}{\cftdotfill{\cftdotsep}}
 
 \tableofcontents
 
 \section*{About}
 \addcontentsline{toc}{section}{\protect\numberline{}About}
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec at justo tincidunt, vestibulum libero et, sollicitudin velit. Nam efficitur neque nec magna volutpat, eu vehicula ante tincidunt. Phasellus malesuada, nulla ac egestas convallis, ipsum odio malesuada dui, eu ultricies odio lorem sit amet mi.
+
+This document provides descriptions, instructions, and commands for projects using a standard Raspberry Pi 5 kit. Each project is inspired by a YouTube video, but this document refines and expands upon the content to offer clear, structured guidance for those who wish to replicate the projects. The purpose of collecting this information in a single document is as follows:
+
+\begin{itemize}
+\item Many YouTube videos are irrelevant or poorly made. This document carefully selects only the most useful ones.
+\item Some videos lack key instructions or commands. By providing them here, users can avoid the need to retype everything manually.
+\item Some videos require additional explanations or expanded details. This document enhances those projects to make them more practical and informative.
+\end{itemize}
+
+In IT, a "project" typically refers to a time-bound endeavor with a unique outcome. While this definition does not fully align with how the term is used in this document, it remains the closest approximation to describe the work presented here.
 
 \section{Project 1: Lorem Ipsum Setup}
 
 \subsection{Overview}
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam vehicula augue id varius fermentum.
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam vehicula augue id varius fermentum. This project is inspired by a video available on YouTube: \href{https://www.youtube.com/watch?v=bllS9tkCkaM}{\textbf{\color{blue}Click here to watch the video}}.
 
 \subsection{Steps}
 \begin{enumerate}
     \item Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-    \item Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+    \item Run the following command to update package lists:
+\begin{lstlisting}[language=bash, breaklines=true, columns=fullflexible]
+$ sudo apt install git build-essential cmake libuv1-dev libssl-dev libhwloc-dev -y
+\end{lstlisting}
 \end{enumerate}
 
 \section{Project 2: Lorem Ipsum Project}
