@@ -41,21 +41,79 @@ This document provides descriptions, instructions, and commands for projects usi
 
 In IT, a "project" typically refers to a time-bound endeavor with a unique outcome. While this definition does not fully align with how the term is used in this document, it remains the closest approximation to describe the work presented here.
 
-\section{Project 1: Lorem Ipsum Setup}
+\section*{Raspberry Pi 5 preparation}
+\addcontentsline{toc}{section}{\protect\numberline{}Raspberry Pi 5 preparation}
+
+Add SSD to the PC using an SSD reader to install an operating system. Use the Raspberry Pi Imager, which is a tool that simplifies the process of installing an operating system onto your Raspberry Pi’s storage device. It has three main options:
+\begin{itemize}
+\item \textbf{Device}: Select the Raspberry Pi device (in this case, Raspberry Pi 5).
+\item \textbf{Operating System}: Choose the OS based on the project requirements. The specific OS used for each project will be specified in the \textbf{Projects Overview} section.
+\item \textbf{Storage}: Select the storage device, either a microSD card or an SSD, which will be used to boot and store data for the Raspberry Pi.
+\end{itemize}
+
+Raspberry Pi Imager will write the OS to the selected storage and allow you to configure basic settings such as hostname, Wi-Fi, and SSH. Before clicking \textbf{Next}, press \textbf{Ctrl + Shift + X} to customize settings under \textbf{General}, \textbf{Services}, and \textbf{Options}.
+
+\section{Hosting a Dark Web Site}
 
 \subsection{Overview}
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam vehicula augue id varius fermentum. This project is inspired by a video available on YouTube: \href{https://www.youtube.com/watch?v=bllS9tkCkaM}{\textbf{\color{blue}Click here to watch the video}}.
+Video: \href{https://www.youtube.com/watch?v=bllS9tkCkaM}{\textbf{\color{blue}i put a DARK WEB website on a Raspberry Pi!!}} \\
+Channel: \href{https://www.youtube.com/c/NetworkChuck}{\textbf{\color{blue}NetworkChuck}}
+
+\subsection{Steps}
+\begin{enumerate}
+    \item Update package lists and install Tor:
+    \begin{lstlisting}[language=bash, breaklines=true, columns=fullflexible]
+    $ sudo apt update
+    $ sudo apt install tor
+    \end{lstlisting}
+   
+\end{enumerate}
+
+\section{Mining}
+
+\subsection{Overview}
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse potenti. Integer feugiat nisl vel lacus efficitur, a tincidunt eros vulputate.
 
 \subsection{Steps}
 \begin{enumerate}
     \item Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-    \item Run the following command to update package lists:
-\begin{lstlisting}[language=bash, breaklines=true, columns=fullflexible]
-$ sudo apt install git build-essential cmake libuv1-dev libssl-dev libhwloc-dev -y
-\end{lstlisting}
+    \item Lorem ipsum dolor sit amet, consectetur adipiscing elit.
 \end{enumerate}
 
-\section{Project 2: Lorem Ipsum Project}
+\section{Retropie}
+
+\subsection{Overview}
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse potenti. Integer feugiat nisl vel lacus efficitur, a tincidunt eros vulputate.
+
+\subsection{Steps}
+\begin{enumerate}
+    \item Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+    \item Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+\end{enumerate}
+
+\section{NAS}
+
+\subsection{Overview}
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse potenti. Integer feugiat nisl vel lacus efficitur, a tincidunt eros vulputate.
+
+\subsection{Steps}
+\begin{enumerate}
+    \item Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+    \item Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+\end{enumerate}
+
+\section{LLM}
+
+\subsection{Overview}
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse potenti. Integer feugiat nisl vel lacus efficitur, a tincidunt eros vulputate.
+
+\subsection{Steps}
+\begin{enumerate}
+    \item Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+    \item Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+\end{enumerate}
+
+\section{Pihole}
 
 \subsection{Overview}
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse potenti. Integer feugiat nisl vel lacus efficitur, a tincidunt eros vulputate.
