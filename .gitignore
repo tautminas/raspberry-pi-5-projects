@@ -1,3 +1,6 @@
+# Pdf files
+*pdf
+
 ## Core latex/pdflatex auxiliary files:
 *.aux
 *.lof
@@ -9,7 +12,7 @@
 *.fmt
 *.fot
 *.cb
-*.cb2
+*.cb2v
 .*.lb
 
 ## Intermediate documents:
