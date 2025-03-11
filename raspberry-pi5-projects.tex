@@ -240,7 +240,7 @@ Operating System: Raspberry Pi OS Lite (64-bit)
     \item Transfer ROMs to RetroPie:
     ROMs can be downloaded from \href{https://www.emulatorgames.net}{\textbf{\color{blue}emulatorgames.net}} and \href{https://www.romsgames.net}{\textbf{\color{blue}romsgames.net}}. Use SCP to transfer ROMs from your desktop:
     \begin{lstlisting}[language=bash, breaklines=true, breakatwhitespace=true, columns=fullflexible]
-    $ scp -r ~/Desktop/roms/* username@192.168.1.163:~/RetroPie/roms/
+    $ scp -r ~/Desktop/roms/* username@<YOUR_IP>:~/RetroPie/roms/
     \end{lstlisting}
 
     \item Configure Raspberry Pi settings in RASPI-CONFIG:
@@ -441,16 +441,103 @@ Operating System: Raspberry Pi OS Lite (64-bit)
 \subsection{Additional Resources}
 Many other models can be found on the official Ollama website: \href{https://ollama.com/search}{\textbf{\color{blue}Ollama Model Search}}.
 
-
-\section{Pihole}
+\section{Setting Up Pi-hole for Network-wide Ad Blocking}
 
 \subsection{Overview}
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse potenti. Integer feugiat nisl vel lacus efficitur, a tincidunt eros vulputate.
+Video: \href{https://www.youtube.com/watch?v=cE21YjuaB6o}{\textbf{\color{blue}World's Greatest Pi-hole Tutorial - Easy Raspberry Pi Project!}} \\
+Channel: \href{https://www.youtube.com/@CrosstalkSolutions}{\textbf{\color{blue}Crosstalk Solutions}} \\
+Operating System: Raspberry Pi OS Lite (64-bit)
+
+Pi-hole is a network-wide ad blocker that acts as a DNS sinkhole, filtering out advertisements before they reach your devices. This guide will walk you through setting up Pi-hole on a Raspberry Pi and configuring your network to use it as the primary DNS server.
 
 \subsection{Steps}
 \begin{enumerate}
-    \item Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-    \item Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+    \item Update your system:
+    \begin{lstlisting}[language=bash, breaklines=true, breakatwhitespace=true, columns=fullflexible]
+    $ sudo apt update && sudo apt upgrade -y
+    \end{lstlisting}
+
+    \item Install the DHCP client daemon (needed for a static IP setup):
+    \begin{lstlisting}[language=bash, breaklines=true, breakatwhitespace=true, columns=fullflexible]
+    $ sudo apt install dhcpcd
+    \end{lstlisting}
+    
+    \item Configure a static IP address:
+    \begin{lstlisting}[language=bash, breaklines=true, breakatwhitespace=true, columns=fullflexible]
+    $ sudo nano /etc/dhcpcd.conf
+    \end{lstlisting}
+
+    Add the following lines at the end of the file:
+    \begin{lstlisting}[language=bash, breaklines=true, breakatwhitespace=true, columns=fullflexible]
+    interface wlan0
+    static ip_address=<YOUR_IP>/24
+    static routers=<YOUR_ROUTER_IP>
+    static domain_name_servers=<DNS_SERVER_1> <DNS_SERVER_2>
+    \end{lstlisting}
+
+    Save the file and reboot the Raspberry Pi:
+    \begin{lstlisting}[language=bash, breaklines=true, breakatwhitespace=true, columns=fullflexible]
+    $ sudo reboot
+    \end{lstlisting}
+
+    \item Install Pi-hole using the automated script:
+    \begin{lstlisting}[language=bash, breaklines=true, breakatwhitespace=true, columns=fullflexible]
+    $ curl -sSL https://install.pi-hole.net | bash
+    \end{lstlisting}
+
+    Follow the installation prompts:
+    \begin{itemize}
+        \item \textbf{Pi-hole Automated Installer:} Select OK
+        \item \textbf{Open Source Software:} Select OK
+        \item \textbf{Static IP Needed:} Select Continue
+        \item \textbf{Choose An Interface:} Select wlan0
+        \item \textbf{Select Upstream DNS Provider:} Choose Google (or another preferred provider)
+        \item \textbf{Blocklists:} Select Yes
+        \item \textbf{Enable Logging:} Select Yes
+        \item \textbf{Select a privacy mode for FTL:} Choose "Show everything"
+        \item \textbf{Installation Complete:} Select OK
+    \end{itemize}
+
+    \item Access the Pi-hole web interface:
+    \begin{lstlisting}[language=bash, breaklines=true, breakatwhitespace=true, columns=fullflexible]
+    https://<YOUR_IP>/admin
+    \end{lstlisting}
+
+    \item Configure devices to use Pi-hole manually (Example for Windows):
+    \begin{enumerate}
+        \item Open \textit{Network Connections}.
+        \item Right-click on your Wi-Fi connection and select \textit{Properties}.
+        \item Select \textit{Internet Protocol Version 4 (TCP/IPv4)} and click \textit{Properties}.
+        \item Choose \textit{Use the following DNS server addresses} and enter:
+        \begin{itemize}
+            \item Preferred DNS server: \texttt{\textless YOUR\_IP\textgreater}
+            \item Alternate DNS server: Leave blank or use another DNS (e.g., 1.1.1.1)
+        \end{itemize}
+        \item Click OK to apply changes.
+    \end{enumerate}
+
+    \item Ensure Raspberry Pi uses Pi-hole for its own DNS queries:
+    \begin{lstlisting}[language=bash, breaklines=true, breakatwhitespace=true, columns=fullflexible]
+    $ sudo nano /etc/resolv.conf
+    \end{lstlisting}
+
+    Replace the contents with:
+    \begin{lstlisting}[language=bash, breaklines=true, breakatwhitespace=true, columns=fullflexible]
+    nameserver <YOUR_IP>
+    \end{lstlisting}
+
+    Lock the file to prevent modifications:
+    \begin{lstlisting}[language=bash, breaklines=true, breakatwhitespace=true, columns=fullflexible]
+    $ sudo chattr +i /etc/resolv.conf
+    \end{lstlisting}
+ 
+    (To unlock the file for changes, use: \texttt{\$ sudo chattr -i /etc/resolv.conf})
+
+    \item Reboot the Raspberry Pi to apply changes:
+    \begin{lstlisting}[language=bash, breaklines=true, breakatwhitespace=true, columns=fullflexible]
+    $ sudo reboot
+    \end{lstlisting}
+
 \end{enumerate}
 
 \end{document}
