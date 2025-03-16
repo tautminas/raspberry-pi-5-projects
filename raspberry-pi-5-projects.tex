@@ -47,18 +47,20 @@
 
 \tableofcontents
 
-\section*{About}
-\addcontentsline{toc}{section}{\protect\numberline{}About}
+\section*{About}  
+\addcontentsline{toc}{section}{\protect\numberline{}About}  
 
-This document provides descriptions, instructions, and commands for projects using a standard Raspberry Pi 5 kit. Each project is inspired by a YouTube video, but this document refines and expands upon the content to offer clear, structured guidance for those who wish to replicate the projects. The purpose of collecting this information in a single document is as follows:
+This document provides descriptions, instructions and commands for projects using a Raspberry Pi 5. Each project is inspired by a YouTube video, but this document refines and expands upon the content to offer clear guidance for those who wish to replicate the projects. The purpose of collecting this information in a single document is as follows:
 
 \begin{itemize}
-\item Many YouTube videos are irrelevant or poorly made. This document carefully selects only the most useful ones.
-\item Some videos lack key instructions or commands. By providing them here, users can avoid the need to retype everything manually.
-\item Some videos require additional explanations or expanded details. This document enhances those projects to make them more practical and informative.
+\item Some videos lack quality or are no longer relevant. This document selects the useful ones.
+\item Some videos do not provide commands in written form. By providing them here, readers can avoid needing to manually retype everything.
+\item Some videos could benefit from additional suggestions or improvements. This document expands on those projects to make them more practical.
 \end{itemize}
 
-In IT, a "project" typically refers to a time-bound endeavor with a unique outcome. While this definition does not fully align with how the term is used in this document, it remains the closest approximation to describe the work presented here.
+The projects in this document were created using the Raspberry Pi 5 Desktop Kit. However, in most cases, a Raspberry Pi 5 Starter Kit provides all the necessary components to follow along. Additionally, these projects are not specific to the Raspberry Pi 5 as most of them can be completed using other Raspberry Pi models as well.  
+
+In IT, a "project" is defined as a time-bound endeavor with a unique outcome. While this definition does not fully align with how it is used in the document, it remains the closest approximation to describe the work presented here.
 
 \section*{Raspberry Pi 5 preparation}
 \addcontentsline{toc}{section}{\protect\numberline{}Raspberry Pi 5 preparation}
@@ -71,6 +73,15 @@ Add SSD to the PC using an SSD reader to install an operating system. Use the Ra
 \end{itemize}
 
 Raspberry Pi Imager will write the OS to the selected storage and allow you to configure basic settings such as hostname, Wi-Fi, and SSH. Before clicking \textbf{Next}, press \textbf{Ctrl + Shift + X} to customize settings under \textbf{General}, \textbf{Services}, and \textbf{Options}.
+
+For some projects, it may be necessary to connect to the Raspberry Pi remotely. In such cases, you need to determine its IP address and establish a connection by following these steps:
+
+\begin{itemize}  
+\item \textbf{Finding the Raspberry Pi's IP Address:} One easy method is using \href{https://www.fing.com/}{\textbf{\color{blue}Fing}}, a network scanning tool available for mobile and desktop. It detects devices on your local network and displays their IP addresses.  
+\item \textbf{Accessing the Raspberry Pi via SSH:} You can use \href{https://www.chiark.greenend.org.uk/~sgtatham/putty/}{\textbf{\color{blue}PuTTY}}, a free SSH client for Windows. Open PuTTY, enter the Raspberry Pi's IP address, select \textbf{SSH} as the connection type, and click \textbf{Open}. When prompted, log in using the default credentials.  
+\end{itemize}  
+
+Not all projects will require SSH access, but for those that do, these tools help simplify the setup process.  
 
 \section{Hosting a Dark Web Site}
 
