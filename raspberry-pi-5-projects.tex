@@ -62,26 +62,39 @@ The projects in this document were created using the Raspberry Pi 5 Desktop Kit.
 
 In IT, a "project" is defined as a time-bound endeavor with a unique outcome. While this definition does not fully align with how it is used in the document, it remains the closest approximation to describe the work presented here.
 
-\section*{Raspberry Pi 5 preparation}
-\addcontentsline{toc}{section}{\protect\numberline{}Raspberry Pi 5 preparation}
+\section*{Raspberry Pi 5 Preparation}
+\addcontentsline{toc}{section}{\protect\numberline{}Raspberry Pi 5 Preparation}
 
-Add SSD to the PC using an SSD reader to install an operating system. Use the Raspberry Pi Imager, which is a tool that simplifies the process of installing an operating system onto your Raspberry Pi’s storage device. It has three main options:
-\begin{itemize}
-\item \textbf{Device}: Select the Raspberry Pi device (in this case, Raspberry Pi 5).
-\item \textbf{Operating System}: Choose the OS based on the project requirements. The specific OS used for each project will be specified in the \textbf{Projects Overview} section.
-\item \textbf{Storage}: Select the storage device, either a microSD card or an SSD, which will be used to boot and store data for the Raspberry Pi.
-\end{itemize}
+Before using your Raspberry Pi, you must first install an operating system onto a microSD card. Follow these steps to set it up:
+\begin{enumerate}
+    \item Insert the microSD card into your PC (not the Raspberry Pi) using an SD adapter. Depending on the adapter, plug it into either the SD card slot or a USB port on your computer.
+    \item Open the \href{https://www.raspberrypi.com/software}{\textbf{\color{blue}Raspberry Pi Imager}} application. This tool simplifies the process of installing an operating system onto your Raspberry Pi’s storage. It has three main options:
+    \begin{itemize}
+        \item Device: Select your Raspberry Pi device (for example, Raspberry Pi 5).
+        \item Operating System: Choose the OS based on the project’s requirements. The specific OS will be mentioned in the Projects Overview section.
+        \item Storage: Select the storage device (either a microSD card or an SSD) that will be used to boot and store data for the Raspberry Pi.
+    \end{itemize}
+    \item Customize the settings to enable remote access to the Raspberry Pi by pressing Ctrl + Shift + X, then set the hostname, username, password, configure wireless LAN, set locale settings, and enable SSH.
+    \item Proceed with the OS installation by selecting Next. The Raspberry Pi Imager will then write the OS to the selected storage device.
+    \item Once the OS is successfully written to the microSD card, insert it into the Raspberry Pi and power it on. Your Raspberry Pi will now be ready to use.
+\end{enumerate}
 
-Raspberry Pi Imager will write the OS to the selected storage and allow you to configure basic settings such as hostname, Wi-Fi, and SSH. Before clicking \textbf{Next}, press \textbf{Ctrl + Shift + X} to customize settings under \textbf{General}, \textbf{Services}, and \textbf{Options}.
+For some projects, it may be necessary to connect to the Raspberry Pi remotely. To do so, follow these steps:
+\begin{enumerate}
+\item Use a tool like \href{https://www.fing.com/}{\textbf{\color{blue}Fing}}, available for both mobile and desktop, to find the Raspberry Pi's IP address. Fing detects devices on your local network and displays their IP addresses. 
+\item Once you have the IP address, connect to the Raspberry Pi via SSH using a tool like \href{https://www.chiark.greenend.org.uk/~sgtatham/putty/}{\textbf{\color{blue}PuTTY}}, a free SSH client for Windows. Open PuTTY, enter the Raspberry Pi's IP address, select SSH as the connection type, and click "Open." When prompted, log in using the default credentials (username: pi, password: raspberry).
+\end{enumerate}
 
-For some projects, it may be necessary to connect to the Raspberry Pi remotely. In such cases, you need to determine its IP address and establish a connection by following these steps:
+After logging into your Raspberry Pi 5 (either remotely or locally), you need to run two essential commands, which are required for every project:
+\begin{enumerate}
+\item \texttt{sudo apt update}: This command updates the list of available packages and their versions from the repositories.
+\item \texttt{sudo apt upgrade}: This command upgrades all the installed packages to their latest available versions.
+\end{enumerate}
 
-\begin{itemize}  
-\item \textbf{Finding the Raspberry Pi's IP Address:} One easy method is using \href{https://www.fing.com/}{\textbf{\color{blue}Fing}}, a network scanning tool available for mobile and desktop. It detects devices on your local network and displays their IP addresses.  
-\item \textbf{Accessing the Raspberry Pi via SSH:} You can use \href{https://www.chiark.greenend.org.uk/~sgtatham/putty/}{\textbf{\color{blue}PuTTY}}, a free SSH client for Windows. Open PuTTY, enter the Raspberry Pi's IP address, select \textbf{SSH} as the connection type, and click \textbf{Open}. When prompted, log in using the default credentials.  
-\end{itemize}  
+You can run both commands at once by using:
+\begin{verbatim} sudo apt update && sudo apt upgrade -y \end{verbatim}
 
-Not all projects will require SSH access, but for those that do, these tools help simplify the setup process.  
+The \texttt{-y} flag automatically confirms all prompts during the upgrade process, so you won't need to manually approve each step. This may take some time depending on your internet speed and the number of packages that need to be upgraded.
 
 \section{Hosting a Dark Web Site}
 
