@@ -1,0 +1,84 @@
+\section{Running Large Language Models with Ollama}
+
+\subsection{Overview}
+Video: \href{https://www.youtube.com/watch?v=nNxtQhz1b2M}{\textbf{\color{blue}Raspberry Pi 5 AI Setup Guide: Run DeepSeek, TinyLlama +more LOCALLY!}} \\
+Channel: \href{https://www.youtube.com/@WagnersTechTalk}{\textbf{\color{blue}Wagner's TechTalk}} \\
+Operating System: Raspberry Pi OS Lite (64-bit)
+
+\subsection{Steps}
+\begin{enumerate}
+    \item Update your Raspberry Pi:
+    \begin{lstlisting}[language=bash, breaklines=true, breakatwhitespace=true, columns=fullflexible]
+    $ sudo apt update
+    $ sudo apt upgrade
+    \end{lstlisting}
+
+    \item Install Ollama:
+    \begin{lstlisting}[language=bash, breaklines=true, breakatwhitespace=true, columns=fullflexible]
+    $ curl -fsSL https://ollama.com/install.sh | sh
+    \end{lstlisting}
+    After installation, verify the version of Ollama installed:
+    \begin{lstlisting}[language=bash, breaklines=true, breakatwhitespace=true, columns=fullflexible]
+    $ ollama -v
+    \end{lstlisting}
+
+    \item Run the LLM:
+
+    To run TinyLlama (1.1 billion parameters / 637MB):
+    \begin{lstlisting}[language=bash, breaklines=true, breakatwhitespace=true, columns=fullflexible]
+    $ ollama run tinyllama
+    \end{lstlisting}
+
+    To run DeepSeek-R1 (1.5 billion parameters / 1.1GB):
+    \begin{lstlisting}[language=bash, breaklines=true, breakatwhitespace=true, columns=fullflexible]
+    $ ollama run deepseek-r1:1.5b
+    \end{lstlisting}
+
+    The first time you run a new LLM, it will download the model, so it will take longer. 	
+
+    \item Ask the LLM a question by typing any question and pressing \texttt{ENTER}. Keep in mind that running an LLM on the Raspberry Pi 5 may be slower than using an online platform.
+    
+    \item Ollama LLM Commands:
+
+    \begin{itemize}
+        \item \texttt{/set} – Set session variables
+        \item \texttt{/show} – Show model information
+        \item \texttt{/load <model>} – Load a session or model
+        \item \texttt{/save <model>} – Save your current session
+        \item \texttt{/clear} – Clear session context
+        \item \texttt{/bye} – Exit the LLM
+        \item \texttt{/?}, \texttt{/help} – Help for a command
+        \item \texttt{/? shortcuts} – Help for keyboard shortcuts
+    \end{itemize}
+
+    \item Exit Ollama:
+    \begin{lstlisting}[language=bash, breaklines=true, breakatwhitespace=true, columns=fullflexible]
+    $ /bye
+    \end{lstlisting}
+    or press \texttt{Ctrl+D}.
+
+    \item List Installed Models:
+    \begin{lstlisting}[language=bash, breaklines=true, breakatwhitespace=true, columns=fullflexible]
+    $ ollama list
+    \end{lstlisting}
+
+    \item Remove a Model:
+    \begin{lstlisting}[language=bash, breaklines=true, breakatwhitespace=true, columns=fullflexible]
+    $ ollama rm <model>
+    \end{lstlisting}
+    Example for removing DeepSeek-R1:
+    \begin{lstlisting}[language=bash, breaklines=true, breakatwhitespace=true, columns=fullflexible]
+    $ ollama rm deepseek-r1:1.5b
+    \end{lstlisting}
+
+    \item Remove Ollama:
+    \begin{lstlisting}[language=bash, breaklines=true, breakatwhitespace=true, columns=fullflexible]
+    $ sudo systemctl stop ollama
+    $ sudo systemctl disable ollama
+    $ sudo rm /etc/systemd/system/ollama.service
+    \end{lstlisting}
+
+\end{enumerate}
+
+\subsection{Additional Resources}
+Many other models can be found on the official Ollama website: \href{https://ollama.com/search}{\textbf{\color{blue}Ollama Model Search}}.
