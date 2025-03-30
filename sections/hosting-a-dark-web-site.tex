@@ -1,52 +1,56 @@
 \section{Hosting a Dark Web Site}
 
-\subsection{Overview}
-Video: \href{https://www.youtube.com/watch?v=bllS9tkCkaM}{\textbf{\color{blue}i put a DARK WEB website on a Raspberry Pi!!}} \\
-Channel: \href{https://www.youtube.com/@NetworkChuck}{\textbf{\color{blue}NetworkChuck}} \\
-Operating System: Raspberry Pi OS (64-bit)
+\textbf{Video}: \href{https://www.youtube.com/watch?v=bllS9tkCkaM}{\textbf{\color{blue}i put a DARK WEB website on a Raspberry Pi!!}} (Channel: \href{https://www.youtube.com/@NetworkChuck}{\textbf{\color{blue}NetworkChuck}})
 
-\subsection{Steps}
+\vspace{0.5cm}
+
+\noindent \textbf{Operating System}: Raspberry Pi OS Lite (64-bit), remote connection.
+
+\vspace{0.5cm}
+
+\noindent \textbf{Steps:}
+
 \begin{enumerate}
-    \item Update package lists and install Tor:
-    \begin{lstlisting}[language=bash, breaklines=true, breakatwhitespace=true, columns=fullflexible]
-    $ sudo apt update
-    $ sudo apt install tor
-    \end{lstlisting}
+\item Update package lists and install Tor:
+\begin{lstlisting}[language=bash, breaklines=true, breakatwhitespace=true, columns=fullflexible]
+$ sudo apt update
+$ sudo apt install tor
+\end{lstlisting}
 
-   \item Edit the Tor configuration file:
-    \begin{lstlisting}[language=bash, breaklines=true, breakatwhitespace=true, columns=fullflexible]
-    $ sudo nano /etc/tor/torrc
-    \end{lstlisting}
-    Uncomment the following lines:
-    \begin{lstlisting}[language=bash, breaklines=true, breakatwhitespace=true, columns=fullflexible]
-    HiddenServiceDir /var/lib/tor/hidden_service/
-    HiddenServicePort 80 127.0.0.1:80
-    \end{lstlisting}
+\item Edit the Tor configuration file:
+\begin{lstlisting}[language=bash, breaklines=true, breakatwhitespace=true, columns=fullflexible]
+$ sudo nano /etc/tor/torrc
+\end{lstlisting}
+Uncomment the following lines:
+\begin{lstlisting}[language=bash, breaklines=true, breakatwhitespace=true, columns=fullflexible]
+HiddenServiceDir /var/lib/tor/hidden_service/
+HiddenServicePort 80 127.0.0.1:80
+\end{lstlisting}
 
-    \item Restart the Tor service:
-    \begin{lstlisting}[language=bash, breaklines=true, breakatwhitespace=true, columns=fullflexible]
-    $ sudo service tor stop
-    $ sudo service tor start
-    $ sudo service tor status
-    \end{lstlisting}
+\item Restart the Tor service:
+\begin{lstlisting}[language=bash, breaklines=true, breakatwhitespace=true, columns=fullflexible]
+$ sudo service tor stop
+$ sudo service tor start
+$ sudo service tor status
+\end{lstlisting}
 
-    \item Retrieve your site address:
-    \begin{lstlisting}[language=bash, breaklines=true, breakatwhitespace=true, columns=fullflexible]
-    $ sudo cat /var/lib/tor/hidden_service/hostname
-    \end{lstlisting}
+\item Obtain your site address:
+\begin{lstlisting}[language=bash, breaklines=true, breakatwhitespace=true, columns=fullflexible]
+$ sudo cat /var/lib/tor/hidden_service/hostname
+\end{lstlisting}
 
-    \item Install and start Nginx:
-    \begin{lstlisting}[language=bash, breaklines=true, breakatwhitespace=true, columns=fullflexible]
-    $ sudo apt install nginx
-    $ sudo service nginx start
-    $ sudo service nginx status
-    \end{lstlisting}
+\item Install and start Nginx:
+\begin{lstlisting}[language=bash, breaklines=true, breakatwhitespace=true, columns=fullflexible]
+$ sudo apt install nginx
+$ sudo service nginx start
+$ sudo service nginx status
+\end{lstlisting}
+You can now check your website using the .onion address from the previous step.
 
 \item Modify Nginx configuration:
 \begin{lstlisting}[language=bash, breaklines=true, breakatwhitespace=true, columns=fullflexible]
 $ sudo nano /etc/nginx/nginx.conf
 \end{lstlisting}
-
 Uncomment the following lines:
 \begin{lstlisting}[language=bash, breaklines=true, breakatwhitespace=true, columns=fullflexible]
 port_in_redirect off;
@@ -58,23 +62,23 @@ Add the following line below "port\_in\_redirect off;":
 server_tokens off;
 \end{lstlisting}
 
-    \item Restart Nginx:
-    \begin{lstlisting}[language=bash, breaklines=true, breakatwhitespace=true, columns=fullflexible]
-    $ sudo service nginx restart
-    \end{lstlisting}
+\item Restart Nginx to apply changes:
+\begin{lstlisting}[language=bash, breaklines=true, breakatwhitespace=true, columns=fullflexible]
+$ sudo service nginx restart
+\end{lstlisting}
+Visit the site using your .onion address to check if the site works after the configuration changes.
 
-    \item Create a simple web page:
-    \begin{lstlisting}[language=bash, breaklines=true, breakatwhitespace=true, columns=fullflexible]
-    $ cd /var/www/html
-    $ sudo rm index.nginx-debian.html
-    $ sudo nano index.html
-    \end{lstlisting}
-    Add your HTML content and save the file.
+\item Create a simple web page:
+\begin{lstlisting}[language=bash, breaklines=true, breakatwhitespace=true, columns=fullflexible]
+$ cd /var/www/html
+$ sudo rm index.nginx-debian.html
+$ sudo nano index.html
+\end{lstlisting}
+Add your HTML content and save the file.
 
 \item Restart Nginx to apply changes:
 \begin{lstlisting}[language=bash, breaklines=true, breakatwhitespace=true, columns=fullflexible]
 $ sudo service nginx restart
 \end{lstlisting}
-Now, your site should be accessible via the generated .onion address!
-   
+Your site should now be accessible via your .onion address!
 \end{enumerate}
