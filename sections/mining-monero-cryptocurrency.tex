@@ -1,65 +1,82 @@
 \section{Mining Monero Cryptocurrency}
 
-\subsection{Overview}
-Video: \href{https://www.youtube.com/watch?v=hHtGN_JzoP8}{\textbf{\color{blue}How to Mine Monero on Raspberry Pi}} \\
-Channel: \href{https://www.youtube.com/@NetworkChuck}{\textbf{\color{blue}NetworkChuck}} \\
-Pool: \href{https://moneroocean.stream/}{\textbf{\color{blue}Monero Ocean}} \\
-Operating System: Raspberry Pi OS Lite (64-bit)
+\noindent \textbf{Video}: \href{https://www.youtube.com/watch?v=hHtGN_JzoP8}{\textbf{\color{blue}How to Mine Monero on Raspberry Pi}} (Channel: \href{https://www.youtube.com/@NetworkChuck}{\textbf{\color{blue}NetworkChuck}})
 
-\subsection{Steps}
+\vspace{0.5cm}
+
+\noindent \textbf{Operating System}: Raspberry Pi OS Lite (64-bit), remote connection.
+
+\vspace{0.5cm}
+
+\noindent \textbf{Steps:}
 \begin{enumerate}
-    \item Update package lists and install dependencies:
-    \begin{lstlisting}[language=bash, breaklines=true, breakatwhitespace=true, columns=fullflexible]
-    $ sudo apt update
-    $ sudo apt install git build-essential cmake libuv1-dev libssl-dev libhwloc-dev -y
-    \end{lstlisting}
+\item Update package lists and install dependencies:
+\begin{lstlisting}[language=bash, breaklines=true, breakatwhitespace=true, columns=fullflexible]
+$ sudo apt update
+$ sudo apt install git build-essential cmake libuv1-dev libssl-dev libhwloc-dev -y
+\end{lstlisting}
 
-    \item Clone the XMRig repository and build the miner:
-    \begin{lstlisting}[language=bash, breaklines=true, breakatwhitespace=true, columns=fullflexible]
-    $ git clone https://github.com/xmrig/xmrig.git
-    $ cd xmrig
-    $ mkdir build
-    $ cd build
-    $ cmake ..
-    $ make
-    \end{lstlisting}
+\item Clone the XMRig repository and build the miner:
+\begin{lstlisting}[language=bash, breaklines=true, breakatwhitespace=true, columns=fullflexible]
+$ git clone https://github.com/xmrig/xmrig.git
+$ cd xmrig
+$ mkdir build
+$ cd build
+$ cmake ..
+$ make
+\end{lstlisting}
 
-    \item Choose one of the following mining options:
-    \begin{enumerate}
-        \item Standard mining:
-        \begin{lstlisting}[language=bash, breaklines=true, breakatwhitespace=true, columns=fullflexible]
-        $ ./xmrig -o gulf.moneroocean.stream:10128 -u <YOUR_WALLET_ADDRESS> -p <WORKER_NAME>
-        \end{lstlisting}
-        
-        \item Mining in a detached session using tmux:
-        \begin{lstlisting}[language=bash, breaklines=true, breakatwhitespace=true, columns=fullflexible]
-        $ tmux
-        $ ./xmrig -o gulf.moneroocean.stream:10128 -u <YOUR_WALLET_ADDRESS> -p <WORKER_NAME>
-        \end{lstlisting}
-        Press \texttt{Ctrl+b}, then \texttt{d} to detach.
-        To reattach the session:
-        \begin{lstlisting}[language=bash, breaklines=true, breakatwhitespace=true, columns=fullflexible]
-        $ tmux attach
-        \end{lstlisting}
-        
-        \item Automating mining with a startup script:
-        \begin{lstlisting}[language=bash, breaklines=true, breakatwhitespace=true, columns=fullflexible]
-        $ nano start_mining.sh
-        \end{lstlisting}
-        Add the following lines:
-        \begin{lstlisting}[language=bash, breaklines=true, breakatwhitespace=true, columns=fullflexible]
-        #!/bin/bash
-        cd <BUILD_DIRECTORY_OF_XMRIG>
-        tmux new-session -d -s xmrig_session './xmrig -o gulf.moneroocean.stream:10128 -u <YOUR_WALLET_ADDRESS> -p <WORKER_NAME>'
-        \end{lstlisting}
-        Save and exit, then make the script executable:
-        \begin{lstlisting}[language=bash, breaklines=true, breakatwhitespace=true, columns=fullflexible]
-        $ chmod +x start_mining.sh
-        \end{lstlisting}
-        Run the script:
-        \begin{lstlisting}[language=bash, breaklines=true, breakatwhitespace=true, columns=fullflexible]
-        $ ./start_mining.sh
-        \end{lstlisting}
-	Now, Monero mining will run in the background, and you can check the session using \texttt{tmux attach}.
-    \end{enumerate}
+\item Create a Monero (XMR) wallet: Download and install the Monero GUI Wallet from \href{https://www.getmonero.org}{\textbf{\color{blue}getmonero.org}}, choose Simple Mode, create a new wallet, name it, back up the mnemonic seed, set a password, and find your wallet address under the Account tab.
+
+\item Start mining Monero:  
+\begin{lstlisting}[language=bash, breaklines=true, breakatwhitespace=true, columns=fullflexible]
+$ ./xmrig -o gulf.moneroocean.stream:10128 -u <YOUR_WALLET_ADDRESS> -p <WORKER_NAME>
+\end{lstlisting}
+
+Use the following keys to monitor mining in real time:  
+\begin{itemize}
+\item \texttt{H} — Show hashrate  
+\item \texttt{S} — Display the number of accepted shares  
+\item \texttt{C} — Check connection status  
+\end{itemize}
+
+To track your mining performance, visit \href{https://moneroocean.stream/}{\textbf{\color{blue}Monero Ocean}}, enter your wallet address and view your statistics.
+
 \end{enumerate}
+
+\vspace{0.5cm}
+
+\noindent \textbf{Optional Enhancements:}
+\begin{itemize}
+\item Running the miner in a detached session with tmux:
+\begin{lstlisting}[language=bash, breaklines=true, breakatwhitespace=true, columns=fullflexible]
+$ tmux
+$ ./xmrig -o gulf.moneroocean.stream:10128 -u <YOUR_WALLET_ADDRESS> -p <WORKER_NAME>
+\end{lstlisting}
+Press \texttt{Ctrl+b}, then \texttt{d} to detach the session while keeping it running in the background.
+
+To reattach the session use the following command:
+\begin{lstlisting}[language=bash, breaklines=true, breakatwhitespace=true, columns=fullflexible]
+$ tmux attach
+\end{lstlisting}
+        
+\item Automating mining with a startup script:
+\begin{lstlisting}[language=bash, breaklines=true, breakatwhitespace=true, columns=fullflexible]
+$ nano start_mining.sh
+\end{lstlisting}
+Add the following lines:
+\begin{lstlisting}[language=bash, breaklines=true, breakatwhitespace=true, columns=fullflexible]
+#!/bin/bash
+cd <BUILD_DIRECTORY_OF_XMRIG>
+tmux new-session -d -s xmrig_session './xmrig -o gulf.moneroocean.stream:10128 -u <YOUR_WALLET_ADDRESS> -p <WORKER_NAME>'
+\end{lstlisting}
+Save and exit, then make the script executable:
+\begin{lstlisting}[language=bash, breaklines=true, breakatwhitespace=true, columns=fullflexible]
+$ chmod +x start_mining.sh
+\end{lstlisting}
+Run the script:
+\begin{lstlisting}[language=bash, breaklines=true, breakatwhitespace=true, columns=fullflexible]
+$ ./start_mining.sh
+\end{lstlisting}
+The script ensures that Monero mining starts in a detached tmux session, allowing it to run persistently in the background. The session can be reattached using \texttt{tmux attach}.
+\end{itemize}
