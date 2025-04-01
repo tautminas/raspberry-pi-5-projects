@@ -1,84 +1,70 @@
 \section{Running Large Language Models with Ollama}
 
-\subsection{Overview}
-Video: \href{https://www.youtube.com/watch?v=nNxtQhz1b2M}{\textbf{\color{blue}Raspberry Pi 5 AI Setup Guide: Run DeepSeek, TinyLlama +more LOCALLY!}} \\
-Channel: \href{https://www.youtube.com/@WagnersTechTalk}{\textbf{\color{blue}Wagner's TechTalk}} \\
-Operating System: Raspberry Pi OS Lite (64-bit)
+\noindent \textbf{Video}: \href{https://www.youtube.com/watch?v=nNxtQhz1b2M}{\textbf{\color{blue}Raspberry Pi 5 AI Setup Guide: Run DeepSeek, TinyLlama +more LOCALLY!}} (Channel: \href{https://www.youtube.com/@WagnersTechTalk}{\textbf{\color{blue}Wagner's TechTalk}})
 
-\subsection{Steps}
+\vspace{0.5cm}
+
+\noindent \textbf{Operating System}: Raspberry Pi OS Lite (64-bit), remote connection.
+
+\vspace{0.5cm}
+
+\noindent \textbf{Steps:}
 \begin{enumerate}
-    \item Update your Raspberry Pi:
-    \begin{lstlisting}[language=bash, breaklines=true, breakatwhitespace=true, columns=fullflexible]
-    $ sudo apt update
-    $ sudo apt upgrade
-    \end{lstlisting}
+\item Prepare the system and install Ollama:
+\begin{lstlisting}[language=bash, breaklines=true, breakatwhitespace=true, columns=fullflexible]
+$ sudo apt update && sudo apt upgrade -y
+$ curl -fsSL https://ollama.com/install.sh | sh
+\end{lstlisting}
 
-    \item Install Ollama:
-    \begin{lstlisting}[language=bash, breaklines=true, breakatwhitespace=true, columns=fullflexible]
-    $ curl -fsSL https://ollama.com/install.sh | sh
-    \end{lstlisting}
-    After installation, verify the version of Ollama installed:
-    \begin{lstlisting}[language=bash, breaklines=true, breakatwhitespace=true, columns=fullflexible]
-    $ ollama -v
-    \end{lstlisting}
+\item Run the \texttt{tinyllama} large language model:
 
-    \item Run the LLM:
+\begin{lstlisting}[language=bash, breaklines=true, breakatwhitespace=true, columns=fullflexible]
+$ ollama run tinyllama
+\end{lstlisting}
 
-    To run TinyLlama (1.1 billion parameters / 637MB):
-    \begin{lstlisting}[language=bash, breaklines=true, breakatwhitespace=true, columns=fullflexible]
-    $ ollama run tinyllama
-    \end{lstlisting}
+The first run takes more time as it downloads the model. Later runs start faster.
 
-    To run DeepSeek-R1 (1.5 billion parameters / 1.1GB):
-    \begin{lstlisting}[language=bash, breaklines=true, breakatwhitespace=true, columns=fullflexible]
-    $ ollama run deepseek-r1:1.5b
-    \end{lstlisting}
-
-    The first time you run a new LLM, it will download the model, so it will take longer. 	
-
-    \item Ask the LLM a question by typing any question and pressing \texttt{ENTER}. Keep in mind that running an LLM on the Raspberry Pi 5 may be slower than using an online platform.
-    
-    \item Ollama LLM Commands:
-
-    \begin{itemize}
-        \item \texttt{/set} – Set session variables
-        \item \texttt{/show} – Show model information
-        \item \texttt{/load <model>} – Load a session or model
-        \item \texttt{/save <model>} – Save your current session
-        \item \texttt{/clear} – Clear session context
-        \item \texttt{/bye} – Exit the LLM
-        \item \texttt{/?}, \texttt{/help} – Help for a command
-        \item \texttt{/? shortcuts} – Help for keyboard shortcuts
-    \end{itemize}
-
-    \item Exit Ollama:
-    \begin{lstlisting}[language=bash, breaklines=true, breakatwhitespace=true, columns=fullflexible]
-    $ /bye
-    \end{lstlisting}
-    or press \texttt{Ctrl+D}.
-
-    \item List Installed Models:
-    \begin{lstlisting}[language=bash, breaklines=true, breakatwhitespace=true, columns=fullflexible]
-    $ ollama list
-    \end{lstlisting}
-
-    \item Remove a Model:
-    \begin{lstlisting}[language=bash, breaklines=true, breakatwhitespace=true, columns=fullflexible]
-    $ ollama rm <model>
-    \end{lstlisting}
-    Example for removing DeepSeek-R1:
-    \begin{lstlisting}[language=bash, breaklines=true, breakatwhitespace=true, columns=fullflexible]
-    $ ollama rm deepseek-r1:1.5b
-    \end{lstlisting}
-
-    \item Remove Ollama:
-    \begin{lstlisting}[language=bash, breaklines=true, breakatwhitespace=true, columns=fullflexible]
-    $ sudo systemctl stop ollama
-    $ sudo systemctl disable ollama
-    $ sudo rm /etc/systemd/system/ollama.service
-    \end{lstlisting}
+\item Interact with the model by typing a question and pressing \texttt{ENTER}. To exit, type:
+\begin{lstlisting}[language=bash, breaklines=true, breakatwhitespace=true, columns=fullflexible]
+$ /bye
+\end{lstlisting}
 
 \end{enumerate}
 
-\subsection{Additional Resources}
-Many other models can be found on the official Ollama website: \href{https://ollama.com/search}{\textbf{\color{blue}Ollama Model Search}}.
+\noindent \textbf{Optional Enhancements:}
+\begin{itemize}
+\item Explore additional models on the \href{https://ollama.com/search}{\textbf{\color{blue}Ollama Model Search}} page. For example, to launch DeepSeek (a lightweight option), use the following command:  
+\begin{lstlisting}[language=bash, breaklines=true, breakatwhitespace=true, columns=fullflexible]
+$ ollama run deepseek-r1:1.5b
+\end{lstlisting}
+
+\item Investigate Ollama commands and model management:
+
+Use the following commands to interact with Ollama:
+\begin{itemize}
+\item \texttt{/show} – Display model details
+\item \texttt{/load <model>} – Load a model or session
+\item \texttt{/save <model>} – Save the current session
+\item \texttt{/clear} – Reset the session
+\item \texttt{/bye} – Exit Ollama
+\item \texttt{/help} – Display help
+\end{itemize}
+
+For model management, list installed models:
+\begin{lstlisting}[language=bash, breaklines=true, breakatwhitespace=true, columns=fullflexible]
+$ ollama list
+\end{lstlisting}
+
+Command for removing a model:
+\begin{lstlisting}[language=bash, breaklines=true, breakatwhitespace=true, columns=fullflexible]
+$ ollama rm <model>
+\end{lstlisting}
+
+Commands to uninstall Ollama:
+\begin{lstlisting}[language=bash, breaklines=true, breakatwhitespace=true, columns=fullflexible]
+$ sudo systemctl stop ollama
+$ sudo systemctl disable ollama
+$ sudo rm /etc/systemd/system/ollama.service
+\end{lstlisting}
+
+\end{itemize}
