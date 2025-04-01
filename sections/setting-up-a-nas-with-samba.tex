@@ -1,60 +1,63 @@
 \section{Setting Up a NAS with Samba}
 
-\subsection{Overview}
-Video: \href{https://www.youtube.com/watch?v=8QxJWW0mjAs}{\textbf{\color{blue}Pi Network File Share to Windows \& More | Pi NAS/SMB | Raspberry Pi Guide}} \\
-Channel: \href{https://www.youtube.com/@TroubleChute}{\textbf{\color{blue}TroubleChute}} \\
-Operating System: Raspberry Pi OS Lite (64-bit)
+\noindent \textbf{Video}: \href{https://www.youtube.com/watch?v=8QxJWW0mjAs}{\textbf{\color{blue}Pi Network File Share to Windows \& More | Pi NAS/SMB | Raspberry Pi Guide}} (Channel: \href{https://www.youtube.com/@TroubleChute}{\textbf{\color{blue}TroubleChute}})
 
-A NAS (Network-Attached Storage) is a device that allows file sharing over a network. In this guide, we will set up Samba on a Raspberry Pi, enabling file sharing using the SMB (Server Message Block) protocol. This will allow different devices to access shared files on the Raspberry Pi.
+\vspace{0.5cm}
 
-\subsection{Steps}
+\noindent \textbf{Operating System}: Raspberry Pi OS Lite (64-bit), remote connection.
+
+\vspace{0.5cm}
+
+\noindent \textbf{Steps:}
+
 \begin{enumerate}
-    \item Update your system and install Samba:
-    \begin{lstlisting}[language=bash, breaklines=true, breakatwhitespace=true, columns=fullflexible]
-    $ sudo apt update && sudo apt upgrade
-    $ sudo apt install samba samba-common-bin
-    \end{lstlisting}
+\item Update your system and install Samba:
+\begin{lstlisting}[language=bash, breaklines=true, breakatwhitespace=true, columns=fullflexible]
+$ sudo apt update && sudo apt upgrade -y
+$ sudo apt install samba samba-common-bin -y
+\end{lstlisting}
 
-    \item Create a shared directory:
-    \begin{lstlisting}[language=bash, breaklines=true, breakatwhitespace=true, columns=fullflexible]
-    $ mkdir ~/shared
-    \end{lstlisting}
+\item Create a shared directory:
+\begin{lstlisting}[language=bash, breaklines=true, breakatwhitespace=true, columns=fullflexible]
+$ mkdir ~/shared
+\end{lstlisting}
 
-    \item Edit the Samba configuration file:
-    \begin{lstlisting}[language=bash, breaklines=true, breakatwhitespace=true, columns=fullflexible]
-    $ sudo nano /etc/samba/smb.conf
-    \end{lstlisting}
-    Add the following at the end of the file:
-    \begin{lstlisting}[language=bash, breaklines=true, breakatwhitespace=true, columns=fullflexible]
-    [shared]
-    path=/home/<USERNAME>/shared
-    writable=Yes
-    create mask=0666
-    directory mask=0666
-    public=no
-    \end{lstlisting}
+\item Edit the Samba configuration file:
+\begin{lstlisting}[language=bash, breaklines=true, breakatwhitespace=true, columns=fullflexible]
+$ sudo nano /etc/samba/smb.conf
+\end{lstlisting}
+Add the following at the end of the file:
+\begin{lstlisting}[language=bash, breaklines=true, breakatwhitespace=true, columns=fullflexible]
+[shared]
+path=/home/<USERNAME>/shared
+writable=Yes
+create mask=0666
+directory mask=0666
+public=no
+\end{lstlisting}
 
-    \item Set a Samba password for your user:
-    \begin{lstlisting}[language=bash, breaklines=true, breakatwhitespace=true, columns=fullflexible]
-    $ sudo smbpasswd -a <USERNAME>
-    \end{lstlisting}
+\item Set a Samba password for your user:
+\begin{lstlisting}[language=bash, breaklines=true, breakatwhitespace=true, columns=fullflexible]
+$ sudo smbpasswd -a <USERNAME>
+\end{lstlisting}
 
-    \item Restart the Samba service:
-    \begin{lstlisting}[language=bash, breaklines=true, breakatwhitespace=true, columns=fullflexible]
-    $ sudo systemctl restart smbd
-    \end{lstlisting}
+\item Restart the Samba service:
+\begin{lstlisting}[language=bash, breaklines=true, breakatwhitespace=true, columns=fullflexible]
+$ sudo systemctl restart smbd
+\end{lstlisting}
 
-    \item Find your Raspberry Pi's IP address:
-    \begin{lstlisting}[language=bash, breaklines=true, breakatwhitespace=true, columns=fullflexible]
-    $ hostname -I
-    \end{lstlisting}
+\item Find your Raspberry Pi's IP address:
+\begin{lstlisting}[language=bash, breaklines=true, breakatwhitespace=true, columns=fullflexible]
+$ hostname -I
+\end{lstlisting}
 
-    \item To access the shared directory from a Windows computer, follow these steps:
-     \begin{enumerate}
-        \item Open \textit{This PC}.
-        \item Right-click on the empty space and select \textit{Add a network location}.
-        \item Follow the prompts: Click \textit{Next}, then \textit{Next} again.
-        \item Enter the network path in the format: \texttt{\\*Add ip*/shared} and click \textit{Next}.
-      \end{enumerate}
+\item To access the shared folder from Windows, follow these steps:
+\begin{enumerate}
+\item Open \textbf{This PC}.
+\item Right-click on an empty area and select \textbf{Add a network location}.
+\item Proceed through the setup by clicking \textbf{Next} at each step until you reach the \textbf{Specify the location of your website} screen.
+\item Enter the network path in the format: \texttt{\\\textbackslash\textbackslash<RASPBERRY\_PI\_IP>\textbackslash shared}, then click \textbf{Next}.
+\end{enumerate}
+
 
 \end{enumerate}
