@@ -1,98 +1,101 @@
 \section{Setting Up Pi-hole for Ad Blocking}
 
-\subsection{Overview}
-Video: \href{https://www.youtube.com/watch?v=cE21YjuaB6o}{\textbf{\color{blue}World's Greatest Pi-hole Tutorial - Easy Raspberry Pi Project!}} \\
-Channel: \href{https://www.youtube.com/@CrosstalkSolutions}{\textbf{\color{blue}Crosstalk Solutions}} \\
-Operating System: Raspberry Pi OS Lite (64-bit)
+\noindent \textbf{Video}: \href{https://www.youtube.com/watch?v=cE21YjuaB6o}{\textbf{\color{blue}World's Greatest Pi-hole Tutorial - Easy Raspberry Pi Project!}} (Channel: \href{https://www.youtube.com/@CrosstalkSolutions}{\textbf{\color{blue}Crosstalk Solutions}})
 
-Pi-hole is a network-wide ad blocker that acts as a DNS sinkhole, filtering out advertisements before they reach your devices. This guide will walk you through setting up Pi-hole on a Raspberry Pi and configuring your network to use it as the primary DNS server.
+\vspace{0.5cm}
 
-\subsection{Steps}
+\noindent \textbf{Operating System}: Raspberry Pi OS Lite (64-bit), remote connection.
+
+\vspace{0.5cm}
+
+\noindent \textbf{Steps:}
+
 \begin{enumerate}
-    \item Update your system:
-    \begin{lstlisting}[language=bash, breaklines=true, breakatwhitespace=true, columns=fullflexible]
-    $ sudo apt update && sudo apt upgrade -y
-    \end{lstlisting}
+\item Prepare the system and install the DHCP client daemon (needed for a static IP setup):
+\begin{lstlisting}[language=bash, breaklines=true, breakatwhitespace=true, columns=fullflexible]
+$ sudo apt update && sudo apt upgrade -y
+$ sudo apt install dhcpcd
+\end{lstlisting}
+   
+\item Configure a static IP address:
+\begin{lstlisting}[language=bash, breaklines=true, breakatwhitespace=true, columns=fullflexible]
+$ sudo nano /etc/dhcpcd.conf
+\end{lstlisting}
 
-    \item Install the DHCP client daemon (needed for a static IP setup):
-    \begin{lstlisting}[language=bash, breaklines=true, breakatwhitespace=true, columns=fullflexible]
-    $ sudo apt install dhcpcd
-    \end{lstlisting}
-    
-    \item Configure a static IP address:
-    \begin{lstlisting}[language=bash, breaklines=true, breakatwhitespace=true, columns=fullflexible]
-    $ sudo nano /etc/dhcpcd.conf
-    \end{lstlisting}
+Add the following lines at the end of the file:
+\begin{lstlisting}[language=bash, breaklines=true, breakatwhitespace=true, columns=fullflexible]
+interface wlan0
+static ip_address=<YOUR_IP>/24
+static routers=<YOUR_ROUTER_IP>
+static domain_name_servers=<DNS_SERVER_1> <DNS_SERVER_2>
+\end{lstlisting}
 
-    Add the following lines at the end of the file:
-    \begin{lstlisting}[language=bash, breaklines=true, breakatwhitespace=true, columns=fullflexible]
-    interface wlan0
-    static ip_address=<YOUR_IP>/24
-    static routers=<YOUR_ROUTER_IP>
-    static domain_name_servers=<DNS_SERVER_1> <DNS_SERVER_2>
-    \end{lstlisting}
+Save the file and reboot the Raspberry Pi:
+\begin{lstlisting}[language=bash, breaklines=true, breakatwhitespace=true, columns=fullflexible]
+$ sudo reboot
+\end{lstlisting}
 
-    Save the file and reboot the Raspberry Pi:
-    \begin{lstlisting}[language=bash, breaklines=true, breakatwhitespace=true, columns=fullflexible]
-    $ sudo reboot
-    \end{lstlisting}
+\item Install Pi-hole using the automated script:
+\begin{lstlisting}[language=bash, breaklines=true, breakatwhitespace=true, columns=fullflexible]
+$ curl -sSL https://install.pi-hole.net | bash
+\end{lstlisting}
 
-    \item Install Pi-hole using the automated script:
-    \begin{lstlisting}[language=bash, breaklines=true, breakatwhitespace=true, columns=fullflexible]
-    $ curl -sSL https://install.pi-hole.net | bash
-    \end{lstlisting}
+Follow the installation prompts:
+\begin{itemize}
+\item \textbf{Pi-hole Automated Installer:} Select OK
+\item \textbf{Open Source Software:} Select OK
+\item \textbf{Static IP Needed:} Select Continue
+\item \textbf{Choose An Interface:} Select wlan0
+\item \textbf{Select Upstream DNS Provider:} Choose Google (or another preferred provider)
+\item \textbf{Blocklists:} Select Yes
+\item \textbf{Enable Logging:} Select Yes
+\item \textbf{Select a privacy mode for FTL:} Choose "Show everything"
+\item \textbf{Installation Complete:} Select OK
+\end{itemize}
 
-    Follow the installation prompts:
-    \begin{itemize}
-        \item \textbf{Pi-hole Automated Installer:} Select OK
-        \item \textbf{Open Source Software:} Select OK
-        \item \textbf{Static IP Needed:} Select Continue
-        \item \textbf{Choose An Interface:} Select wlan0
-        \item \textbf{Select Upstream DNS Provider:} Choose Google (or another preferred provider)
-        \item \textbf{Blocklists:} Select Yes
-        \item \textbf{Enable Logging:} Select Yes
-        \item \textbf{Select a privacy mode for FTL:} Choose "Show everything"
-        \item \textbf{Installation Complete:} Select OK
-    \end{itemize}
+\item Access the Pi-hole web interface:
+\begin{lstlisting}[language=bash, breaklines=true, breakatwhitespace=true, columns=fullflexible]
+https://<YOUR_IP>/admin
+\end{lstlisting}
 
-    \item Access the Pi-hole web interface:
-    \begin{lstlisting}[language=bash, breaklines=true, breakatwhitespace=true, columns=fullflexible]
-    https://<YOUR_IP>/admin
-    \end{lstlisting}
+\item Manually configure Raspberry Pi to use Pi-hole:
+\begin{lstlisting}[language=bash, breaklines=true, breakatwhitespace=true, columns=fullflexible]
+$ sudo nano /etc/resolv.conf
+\end{lstlisting}
 
-    \item Configure devices to use Pi-hole manually (Example for Windows):
-    \begin{enumerate}
-        \item Open \textit{Network Connections}.
-        \item Right-click on your Wi-Fi connection and select \textit{Properties}.
-        \item Select \textit{Internet Protocol Version 4 (TCP/IPv4)} and click \textit{Properties}.
-        \item Choose \textit{Use the following DNS server addresses} and enter:
-        \begin{itemize}
-            \item Preferred DNS server: \texttt{\textless YOUR\_IP\textgreater}
-            \item Alternate DNS server: Leave blank or use another DNS (e.g., 1.1.1.1)
-        \end{itemize}
-        \item Click OK to apply changes.
-    \end{enumerate}
+Replace the contents with:
+\begin{lstlisting}[language=bash, breaklines=true, breakatwhitespace=true, columns=fullflexible]
+nameserver <YOUR_IP>
+\end{lstlisting}
 
-    \item Ensure Raspberry Pi uses Pi-hole for its own DNS queries:
-    \begin{lstlisting}[language=bash, breaklines=true, breakatwhitespace=true, columns=fullflexible]
-    $ sudo nano /etc/resolv.conf
-    \end{lstlisting}
-
-    Replace the contents with:
-    \begin{lstlisting}[language=bash, breaklines=true, breakatwhitespace=true, columns=fullflexible]
-    nameserver <YOUR_IP>
-    \end{lstlisting}
-
-    Lock the file to prevent modifications:
-    \begin{lstlisting}[language=bash, breaklines=true, breakatwhitespace=true, columns=fullflexible]
-    $ sudo chattr +i /etc/resolv.conf
-    \end{lstlisting}
+Lock the file to prevent modifications:
+\begin{lstlisting}[language=bash, breaklines=true, breakatwhitespace=true, columns=fullflexible]
+$ sudo chattr +i /etc/resolv.conf
+\end{lstlisting}
  
-    (To unlock the file for changes, use: \texttt{\$ sudo chattr -i /etc/resolv.conf})
+(To unlock the file for changes, use: \texttt{\$ sudo chattr -i /etc/resolv.conf})
 
-    \item Reboot the Raspberry Pi to apply changes:
-    \begin{lstlisting}[language=bash, breaklines=true, breakatwhitespace=true, columns=fullflexible]
-    $ sudo reboot
-    \end{lstlisting}
+\item Reboot the Raspberry Pi to apply changes:
+\begin{lstlisting}[language=bash, breaklines=true, breakatwhitespace=true, columns=fullflexible]
+$ sudo reboot
+\end{lstlisting}
+
+\noindent \textbf{Optional Enhancements:}
+\begin{itemize}
+
+\item Manually configure a Windows device to use Pi-hole:
+\begin{enumerate}
+\item Open \textbf{Network Connections}.
+\item Right-click on your Wi-Fi connection and select \textbf{Properties}.
+\item Select \textbf{Internet Protocol Version 4 (TCP/IPv4)} and click \textbf{Properties}.
+\item Choose \textbf{Use the following DNS server addresses} and enter:
+\begin{itemize}
+\item Preferred DNS server: \texttt{\textless YOUR\_IP\textgreater}
+\item Alternate DNS server: Leave blank or use another DNS (e.g., 1.1.1.1)
+\end{itemize}
+\item Click OK to apply changes.
+\end{enumerate}
+
+\end{itemize}
 
 \end{enumerate}
