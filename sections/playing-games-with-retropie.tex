@@ -1,93 +1,129 @@
 \section{Playing Games with RetroPie}
 
-\subsection{Overview}
-Video: \href{https://www.youtube.com/watch?v=AaseHnf0k2o}{\textbf{\color{blue}RetroPie: A Raspberry Pi Gaming Machine}} \\
-Channel: \href{https://www.youtube.com/@NetworkChuck}{\textbf{\color{blue}NetworkChuck}} \\
-Operating System: Raspberry Pi OS Lite (64-bit)
+\noindent \textbf{Video}: \href{https://www.youtube.com/watch?v=AaseHnf0k2o}{\textbf{\color{blue}RetroPie: A Raspberry Pi Gaming Machine}} (Channel: \href{https://www.youtube.com/@NetworkChuck}{\textbf{\color{blue}NetworkChuck}})
 
-\subsection{Steps}
+\vspace{0.5cm}
+
+\noindent \textbf{Operating System}: Raspberry Pi OS Lite (64-bit)
+
+\vspace{0.5cm}
+
+\noindent \textbf{Steps:}
 
 \begin{enumerate}
-    \item Update and upgrade packages:
-    \begin{lstlisting}[language=bash, breaklines=true, breakatwhitespace=true, columns=fullflexible]
-    $ sudo apt update
-    $ sudo apt upgrade -y
-    $ sudo apt install git lsb-release
-    \end{lstlisting}
+\item Prepare the system and install essential packages for RetroPie setup:  
+\begin{lstlisting}[language=bash, breaklines=true, breakatwhitespace=true, columns=fullflexible]
+$ sudo apt update && sudo apt upgrade -y  
+$ sudo apt install git lsb-release
+\end{lstlisting}
 
-   \item Clone the RetroPie setup script:
-    \begin{lstlisting}[language=bash, breaklines=true, breakatwhitespace=true, columns=fullflexible]
-    $ cd
-    $ git clone https://github.com/retropie/retropie-setup.git
-    $ cd retropie-setup
-    $ chmod +x retropie_setup.sh
-    \end{lstlisting}
+\item Clone the RetroPie setup script:
+\begin{lstlisting}[language=bash, breaklines=true, breakatwhitespace=true, columns=fullflexible]
+$ cd
+$ git clone https://github.com/retropie/retropie-setup.git
+$ cd retropie-setup
+$ chmod +x retropie_setup.sh
+\end{lstlisting}
 
-    \item Run the setup script:
-    \begin{lstlisting}[language=bash, breaklines=true, breakatwhitespace=true, columns=fullflexible]
-    $ sudo ./retropie_setup.sh
-    \end{lstlisting}
-    Navigate through the setup: OK → OK → Basic install → Yes. The installation process will take a while. After completion, navigate to Configuration/Tools → Autostart → OK → bashwelcometweak → OK → Exit.
+\item Run the setup script:
+\begin{lstlisting}[language=bash, breaklines=true, breakatwhitespace=true, columns=fullflexible]
+$ sudo ./retropie_setup.sh
+\end{lstlisting}
+Navigate through the setup: OK → OK → Basic install → Yes. The installation process will take a while. After completion, navigate to Configuration/Tools → Autostart → OK → bashwelcometweak → OK → Exit.
 
-    \item Reboot the system:
-    \begin{lstlisting}[language=bash, breaklines=true, breakatwhitespace=true, columns=fullflexible]
-    $ sudo reboot
-    \end{lstlisting}
+\item Reboot the system:
+\begin{lstlisting}[language=bash, breaklines=true, breakatwhitespace=true, columns=fullflexible]
+$ sudo reboot
+\end{lstlisting}
 
-    \item Transfer ROMs to RetroPie:
-    ROMs can be downloaded from \href{https://www.emulatorgames.net}{\textbf{\color{blue}emulatorgames.net}} and \href{https://www.romsgames.net}{\textbf{\color{blue}romsgames.net}}. Use SCP to transfer ROMs from your desktop:
-    \begin{lstlisting}[language=bash, breaklines=true, breakatwhitespace=true, columns=fullflexible]
-    $ scp -r ~/Desktop/roms/* username@<YOUR_IP>:~/RetroPie/roms/
-    \end{lstlisting}
+\item Setup the keyboard:  
+\begin{itemize}
+    \item \textbf{D-PAD UP} → Arrow Up  
+    \item \textbf{D-PAD DOWN} → Arrow Down  
+    \item \textbf{D-PAD LEFT} → Arrow Left  
+    \item \textbf{D-PAD RIGHT} → Arrow Right  
+    \item \textbf{START} → Enter  
+    \item \textbf{SELECT} → Tab  
+    \item \textbf{BUTTON A / EAST} → Spacebar  
+    \item \textbf{BUTTON B / SOUTH} → Left Shift  
+    \item \textbf{BUTTON X / NORTH} → Z  
+    \item \textbf{BUTTON Y / WEST} → X  
+    \item \textbf{LEFT SHOULDER} → Q  
+    \item \textbf{RIGHT SHOULDER} → E  
+    \item \textbf{LEFT TRIGGER} → R  
+    \item \textbf{RIGHT TRIGGER} → T  
+    \item \textbf{LEFT THUMB} → C  
+    \item \textbf{RIGHT THUMB} → V  
+    \item \textbf{LEFT ANALOG UP} → W  
+    \item \textbf{LEFT ANALOG DOWN} → S  
+    \item \textbf{LEFT ANALOG LEFT} → A  
+    \item \textbf{LEFT ANALOG RIGHT} → D  
+    \item \textbf{RIGHT ANALOG UP} → I  
+    \item \textbf{RIGHT ANALOG DOWN} → K  
+    \item \textbf{RIGHT ANALOG LEFT} → J  
+    \item \textbf{RIGHT ANALOG RIGHT} → L  
+    \item \textbf{HOTKEY ENABLE} → Left Control (Ctrl)  
+\end{itemize}
 
-    \item Configure Raspberry Pi settings in RASPI-CONFIG:
-    \begin{itemize}
-        \item System Options → Set Hostname, Change Password
-        \item Localisation Options → Set Timezone, WLAN Country
-        \item Interface Options → Enable SSH
-    \end{itemize}
+\item Configure Raspberry Pi settings in RASPI-CONFIG:
+\begin{itemize}
+\item System Options → Set Hostname, Change Password
+\item Localisation Options → Set Timezone, WLAN Country
+\item Interface Options → Enable SSH
+\end{itemize}
 
-    \item Connect to WiFi (outside RASPI-CONFIG) and restart.
+\item Connect to WiFi (outside RASPI-CONFIG) and restart.
 
-    \item Entering and exiting EmulationStation:
-    Pressing \textbf{F4} will take you to the command line interface (CLI). To return to EmulationStation, enter:
-    \begin{lstlisting}[language=bash, breaklines=true, breakatwhitespace=true, columns=fullflexible]
-    $ emulationstation
-    \end{lstlisting}
-    ROMs must be placed in their respective emulator directories, e.g., \texttt{~/RetroPie/roms/psx} for PlayStation games.
+\item Download ROMs for prefered games on a different device. ROMs can be downloaded from \href{https://www.emulatorgames.net}{\textbf{\color{blue}emulatorgames.net}} and \href{https://www.romsgames.net}{\textbf{\color{blue}romsgames.net}}. Reference supported systems at \href{https://retropie.org.uk/docs/Supported-Systems/}{\textbf{\color{blue}RetroPie Supported Systems}}.
+
+\item Transfer ROMs to RetroPie using SCP from the device with ROMs:
+\begin{lstlisting}[language=bash, breaklines=true, breakatwhitespace=true, columns=fullflexible]
+$ scp -r ~/Desktop/roms/* <USERNAME>@<RASPBERRY_PI_IP>:~/RetroPie/roms/
+\end{lstlisting}
     
-    \item Reference supported systems at \href{https://retropie.org.uk/docs/Supported-Systems/}{\textbf{\color{blue}RetroPie Supported Systems}}.
-    
-    \item Configure input mappings for controllers.
-    
-    \item Set up hotkeys:
-    \begin{itemize}
-        \item \textbf{HOTKEY + Start}: Exit game
-        \item \textbf{HOTKEY + Right Shoulder}: Save game
-        \item \textbf{HOTKEY + Left Shoulder}: Load game
-        \item \textbf{HOTKEY + D-PAD Right}: Change save/load slot
-        \item \textbf{HOTKEY + Button B}: Reset game
-        \item \textbf{HOTKEY + Button X}: Open RetroArch menu
-    \end{itemize}
-    
-    \item Personalize game lists:
-    \begin{itemize}
-        \item UI Settings → Set Game List View Style to Grid
-        \item Scraper → Scrape from ScreenScraper → Scrape Now
-    \end{itemize}
-    
-    \item Enable cheats:
-    \begin{enumerate}
-        \item Open RetroArch menu (HOTKEY + Button X)
-        \item Enable Advanced Settings
-        \item Update Cheats via Online Updater
-        \item Load Cheat File and apply changes
-    \end{enumerate}
+\item Move ROMs on the Raspberry Pi to their needed directories
+Pressing \textbf{F4} will take you to the command line interface (CLI). To return to EmulationStation, enter:
+\begin{lstlisting}[language=bash, breaklines=true, breakatwhitespace=true, columns=fullflexible]
+$ emulationstation
+\end{lstlisting}
+ROMs must be placed in their respective emulator directories, e.g., \texttt{~/RetroPie/roms/psx} for PlayStation games. Use cd command to move ROMs to the needed location.
 
-    \item Enable achievements:
-    \begin{enumerate}
-        \item Register at \href{https://retroachievements.org}{\textbf{\color{blue}RetroAchievements}}
-        \item Configure username and password in RetroArch Settings
-        \item Save configuration and restart
-    \end{enumerate}
+\item Personalize game lists in main menu:
+\begin{itemize}
+\item UI Settings → Game List View Style → Grid
+\item Scraper → Scrape from → ScreenScraper → Scrape Now → Set systems to all and user decides on conflicts off → Start
+\end{itemize}
+ 
+\noindent \textbf{Optional Enhancements:}
+\begin{itemize}
+
+\item Use hotkeys while playing:
+\begin{itemize}
+\item \textbf{HOTKEY + Start}: Exit game
+\item \textbf{HOTKEY + Right Shoulder}: Save game
+\item \textbf{HOTKEY + Left Shoulder}: Load game
+\item \textbf{HOTKEY + D-PAD Right}: Change save/load slot
+\item \textbf{HOTKEY + Button B}: Reset game
+\item \textbf{HOTKEY + Button X}: Open RetroArch menu
+\end{itemize}
+
+\item Enable cheats:
+\begin{enumerate}
+\item Open RetroArch menu (HOTKEY + Button X)
+\item Enable Advanced Settings
+\item Update Cheats via Online Updater
+\item Load Cheat File and apply changes
 \end{enumerate}
+
+\item Enable achievements:
+\begin{enumerate}
+\item Register at \href{https://retroachievements.org}{\textbf{\color{blue}RetroAchievements}}
+\item Configure username and password in RetroArch Settings
+\item Save configuration and restart
+\end{enumerate}
+
+\end{itemize}
+
+\end{enumerate}
+
+
