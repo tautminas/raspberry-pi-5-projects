@@ -29,7 +29,7 @@ $ chmod +x retropie_setup.sh
 \begin{lstlisting}[language=bash, breaklines=true, breakatwhitespace=true, columns=fullflexible]
 $ sudo ./retropie_setup.sh
 \end{lstlisting}
-Navigate through the setup: OK → OK → Basic install → Yes. The installation process will take a while. After completion, navigate to Configuration/Tools → Autostart → OK → bashwelcometweak → OK → Exit.
+Navigate through the setup: OK → OK → Basic install → Yes. The installation process will take a while. After completion, navigate to Configuration / tools → autostart → Start EmulationStation at boot → OK → bashwelcometweak → Install Bash Welcom Tweak → OK → Exit.
 
 \item Reboot the system:
 \begin{lstlisting}[language=bash, breaklines=true, breakatwhitespace=true, columns=fullflexible]
@@ -65,22 +65,24 @@ $ sudo reboot
     \item \textbf{HOTKEY ENABLE} → Left Control (Ctrl)  
 \end{itemize}
 
-\item Configure Raspberry Pi settings in RASPI-CONFIG:
+\item Configure Raspberry Pi settings in Retropie menu in the RASPI-CONFIG option:
 \begin{itemize}
-\item System Options → Set Hostname, Change Password
-\item Localisation Options → Set Timezone, WLAN Country
-\item Interface Options → Enable SSH
+\item System Options → Hostname → Enter a hostname
+\item System Options → Password → Enter a new password → OK
+\item Localisation Options → Timezone → Select location → Select timezone
+\item Localisation Options → WLAN Country → Select country
+\item Interface Options → SSH → Yes
 \end{itemize}
 
-\item Connect to WiFi (outside RASPI-CONFIG) and restart.
+\item Select WIFI option in the Retropie menu → Connect to WiFi network → Pick network and enter the password
 
-\item Download ROMs for prefered games on a different device. ROMs can be downloaded from \href{https://www.emulatorgames.net}{\textbf{\color{blue}emulatorgames.net}} and \href{https://www.romsgames.net}{\textbf{\color{blue}romsgames.net}}. Reference supported systems at \href{https://retropie.org.uk/docs/Supported-Systems/}{\textbf{\color{blue}RetroPie Supported Systems}}.
+\item Download ROMs for prefered games on a different device. ROMs can be downloaded from \href{https://www.emulatorgames.net}{\textbf{\color{blue}emulatorgames.net}} and \href{https://www.romsgames.net}{\textbf{\color{blue}romsgames.net}}. Reference supported systems at \href{https://retropie.org.uk/docs/Supported-Systems/}{\textbf{\color{blue}RetroPie Supported Systems}} before downloading the games to make sure that it will work.
 
-\item Transfer ROMs to RetroPie using SCP from the device with ROMs:
+\item In the Retropie menu select SHOW IP. Transfer ROMs to RetroPie using SCP from the device with ROMs:
 \begin{lstlisting}[language=bash, breaklines=true, breakatwhitespace=true, columns=fullflexible]
-$ scp -r ~/Desktop/roms/* <USERNAME>@<RASPBERRY_PI_IP>:~/RetroPie/roms/
-\end{lstlisting}
-    
+$ scp -r <PATH_TO_ROMS_DIRECTORY>/* <USERNAME>@<RASPBERRY_PI_IP>:~/RetroPie/roms/
+\end{lstlisting} 
+
 \item Move ROMs on the Raspberry Pi to their needed directories
 Pressing \textbf{F4} will take you to the command line interface (CLI). To return to EmulationStation, enter:
 \begin{lstlisting}[language=bash, breaklines=true, breakatwhitespace=true, columns=fullflexible]
@@ -88,16 +90,13 @@ $ emulationstation
 \end{lstlisting}
 ROMs must be placed in their respective emulator directories, e.g., \texttt{~/RetroPie/roms/psx} for PlayStation games. Use cd command to move ROMs to the needed location.
 
-\item Personalize game lists in main menu:
+\item Personalize game lists in the MAIN MENU:
 \begin{itemize}
-\item UI Settings → Game List View Style → Grid
-\item Scraper → Scrape from → ScreenScraper → Scrape Now → Set systems to all and user decides on conflicts off → Start
+\item UI SETTINGS → GAME LIST VIEW STYLE → GRID → set IGNORE ARTICLES (NAME SORT ONLY) to OFF
+\item SCRAPER → SCRAPE FROM → SCREENSCRAPER → SCRAPE NOW → Set SYSTEMS to all → set USER DECIDES ON CONFLICTS to off → Start
 \end{itemize}
- 
-\noindent \textbf{Optional Enhancements:}
-\begin{itemize}
 
-\item Use hotkeys while playing:
+\item Now you can play the games. Use hotkeys while playing:
 \begin{itemize}
 \item \textbf{HOTKEY + Start}: Exit game
 \item \textbf{HOTKEY + Right Shoulder}: Save game
@@ -107,19 +106,17 @@ ROMs must be placed in their respective emulator directories, e.g., \texttt{~/Re
 \item \textbf{HOTKEY + Button X}: Open RetroArch menu
 \end{itemize}
 
-\item Enable cheats:
-\begin{enumerate}
-\item Open RetroArch menu (HOTKEY + Button X)
-\item Enable Advanced Settings
-\item Update Cheats via Online Updater
-\item Load Cheat File and apply changes
-\end{enumerate}
+\noindent \textbf{Optional Enhancements:}
+\begin{itemize}
+
+\item Enable cheats: Open RetroArch menu (HOTKEY + Button X) → Settings → User Interface → set Show Advanced Settings to ON → Go back to User Interface → Menu Item Visibility → set Show 'Online Updater' to ON → Go back to Main menu of RetroArch → Online Updater → Update Cheats → Go back to the Main menu of RetroArch → Quick Menu → Cheats → Load Cheat File (Replace) → Select console → Turn ON the wanted cheets by selecting the cheet and setting Enable to ON → Apply Changes
 
 \item Enable achievements:
 \begin{enumerate}
 \item Register at \href{https://retroachievements.org}{\textbf{\color{blue}RetroAchievements}}
-\item Configure username and password in RetroArch Settings
-\item Save configuration and restart
+\item Open the game in which you would like to turn on the achievements
+\item Open RetroArch menu (HOTKEY + Button X) → Settings → Achievements → Turn it ON → Select Username and put in value → Select Password and put in value → set Unlock Sound to ON
+\item Go back to Main menu of RetroArch → Configuration File → Save Current Configuration → Quit RetroArch
 \end{enumerate}
 
 \end{itemize}
