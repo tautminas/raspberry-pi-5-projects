@@ -11,9 +11,9 @@
 \noindent \textbf{Steps:}
 
 \begin{enumerate}
-\item Prepare the system and install essential packages for RetroPie setup:  
+\item Prepare the system and install essential packages for RetroPie setup:
 \begin{lstlisting}[language=bash, breaklines=true, breakatwhitespace=true, columns=fullflexible]
-$ sudo apt update && sudo apt upgrade -y  
+$ sudo apt update && sudo apt upgrade -y
 $ sudo apt install git lsb-release
 \end{lstlisting}
 
@@ -40,7 +40,7 @@ Then, go to bashwelcometweak → Install Bash Welcome Tweak → OK → Exit.
 $ sudo reboot
 \end{lstlisting}
 
-\item Setup the keyboard:  
+\item Setup the keyboard:
 \begin{table}[H]
 \centering
 \begin{tabular}{|l|l|}
@@ -90,14 +90,14 @@ HOTKEY ENABLE & Left Control (Ctrl) \\
 \item Interface Options → SSH → Yes
 \end{itemize}
 
-\item Select WIFI option in the RetroPie menu → Connect to WiFi network → Pick network and enter the password
+\item Select the WIFI option in the RetroPie menu → Connect to WiFi network → Pick network and enter the password
 
 \item Download ROMs for your preferred games using another device. ROMs can be downloaded from \href{https://www.emulatorgames.net}{\textbf{\color{blue}emulatorgames.net}} and \href{https://www.romsgames.net}{\textbf{\color{blue}romsgames.net}}. Check the list of \href{https://retropie.org.uk/docs/Supported-Systems/}{\textbf{\color{blue}RetroPie Supported Systems}} to ensure game compatibility before downloading.
 
 \item In the RetroPie menu select SHOW IP. Transfer ROMs to the Raspberry Pi using SCP from the device where the ROMs are stored.
 \begin{lstlisting}[language=bash, breaklines=true, breakatwhitespace=true, columns=fullflexible]
 $ scp -r <PATH_TO_ROMS_DIRECTORY>/* <USERNAME>@<RASPBERRY_PI_IP>:~/RetroPie/roms/
-\end{lstlisting} 
+\end{lstlisting}
 
 \item Organize the ROMs into their appropriate emulator folders on the Raspberry Pi.
 Pressing \textbf{F4} will take you to the command line interface (CLI). For example, PlayStation games should go into \texttt{~/RetroPie/roms/psx}. Use \texttt{cd} command to move ROMs to the needed location. To return to EmulationStation use the \texttt{emulationstation} command.
@@ -132,7 +132,7 @@ Pressing \textbf{F4} will take you to the command line interface (CLI). For exam
 \item Sign up at \href{https://retroachievements.org}{\textbf{\color{blue}RetroAchievements}}.
 \item Open the game on the Raspberry Pi in which you would like to turn on the achievements.
 \item Open RetroArch menu (HOTKEY + Button X) → Settings → Achievements → Turn it ON → Select Username and put in value → Select Password and put in value → set Unlock Sound to ON.
-\item Go back to Main menu of RetroArch → Configuration File → Save Current Configuration → Quit RetroArch.
+\item Go back to the Main menu of RetroArch → Configuration File → Save Current Configuration → Quit RetroArch.
 \end{enumerate}
 
 \end{itemize}

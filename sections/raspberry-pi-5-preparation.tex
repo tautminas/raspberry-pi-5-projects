@@ -10,14 +10,14 @@ Before using your Raspberry Pi, you must first install an operating system onto 
 \item Operating System: Choose the OS based on the project’s requirements. The required OS is stated at the start of the project section.
 \item Storage: Select the storage device (in this case, a microSD card) that will be used to boot the Raspberry Pi and store data. Be careful, as this process will erase all existing data on the selected storage device.
 \end{itemize}
-\item Customize the settings to enable remote access to the Raspberry Pi by pressing \texttt{Ctrl + Shift + X}. Then, set the hostname, username, password, configure wireless LAN, set locale settings and enable SSH.
+\item Customize the settings to enable remote access to the Raspberry Pi by pressing \texttt{Ctrl + Shift + X}. Then, set the hostname, username, password, configure the wireless LAN, set locale settings and enable SSH.
 \item Proceed with the OS installation by selecting \textbf{Next}. The Raspberry Pi Imager will then write the OS to the selected storage device.
 \item Once the OS is successfully written to the microSD card, insert it into the Raspberry Pi and power it on. Your Raspberry Pi will now be ready to use.
 \end{enumerate}
 
 For most projects, you'll need to connect to the Raspberry Pi remotely. To do so, follow these steps:
 \begin{enumerate}
-\item Use a tool like \href{https://www.fing.com/}{\textbf{\color{blue}Fing}}, available for both mobile and desktop, to find the Raspberry Pi's IP address. Fing detects devices on your local network and displays their IP addresses. 
+\item Use a tool like \href{https://www.fing.com/}{\textbf{\color{blue}Fing}}, available for both mobile and desktop, to find the Raspberry Pi's IP address. Fing detects devices on your local network and displays their IP addresses.
 \item Once you have the IP address, connect to the Raspberry Pi via SSH. Use a tool like \href{https://www.chiark.greenend.org.uk/~sgtatham/putty/}{\textbf{\color{blue}PuTTY}}, a free SSH client for Windows. Launch PuTTY, enter the Raspberry Pi's IP address, select SSH as the connection type and click \textbf{Open}. Log in using your customized credentials (username and password) if you have set them, or use the default credentials (username: pi, password: raspberry) otherwise.
 \end{enumerate}
 
