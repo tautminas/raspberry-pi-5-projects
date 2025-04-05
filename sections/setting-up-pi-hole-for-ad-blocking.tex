@@ -25,10 +25,12 @@ $ sudo nano /etc/dhcpcd.conf
 Add the following lines at the end of the file:
 \begin{lstlisting}[language=bash, breaklines=true, breakatwhitespace=true, columns=fullflexible]
 interface wlan0
-static ip_address=<YOUR_IP>/24
-static routers=<YOUR_ROUTER_IP>
-static domain_name_servers=<DNS_SERVER_1> <DNS_SERVER_2>
+static ip_address=<RASPBERRY_PI_IP>/24
+static routers=<ROUTER_IP>
+static domain_name_servers=<DNS_1> <DNS_2>
 \end{lstlisting}
+
+If specific DNS servers are not preferred, you can use \texttt{8.8.8.8} (Google) for \texttt{<DNS\_1>} and \texttt{1.1.1.1} (Cloudflare) for \texttt{<DNS\_2>} as reliable default options.
 
 Save the file and reboot the Raspberry Pi:
 \begin{lstlisting}[language=bash, breaklines=true, breakatwhitespace=true, columns=fullflexible]
@@ -55,7 +57,7 @@ Follow the installation prompts:
 
 \item Access the Pi-hole web interface:
 \begin{lstlisting}[language=bash, breaklines=true, breakatwhitespace=true, columns=fullflexible]
-https://<YOUR_IP>/admin
+https://<RASPBERRY_PI_IP>/admin
 \end{lstlisting}
 
 \item Manually configure Raspberry Pi to use Pi-hole:
@@ -65,7 +67,7 @@ $ sudo nano /etc/resolv.conf
 
 Replace the contents with:
 \begin{lstlisting}[language=bash, breaklines=true, breakatwhitespace=true, columns=fullflexible]
-nameserver <YOUR_IP>
+nameserver <RASPBERRY_PI_IP>
 \end{lstlisting}
 
 Lock the file to prevent modifications:
@@ -90,7 +92,7 @@ $ sudo reboot
 \item Select \textbf{Internet Protocol Version 4 (TCP/IPv4)} and click \textbf{Properties}.
 \item Choose \textbf{Use the following DNS server addresses} and enter:
 \begin{itemize}
-\item Preferred DNS server: \texttt{\textless YOUR\_IP\textgreater}
+\item Preferred DNS server: \texttt{\textless RASPBERRY\_PI\_IP\textgreater}
 \item Alternate DNS server: Leave blank or use another DNS (e.g., 1.1.1.1)
 \end{itemize}
 \item Click OK to apply changes.
