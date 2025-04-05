@@ -4,6 +4,7 @@ Text Improvements:
 
 - Provide clearer explanations for variable usage in the guide.
 - Add a conclusion or closing section to wrap up the guide and summarize key points.
+- Upload images that provide a clearer explanation of how to use Raspberry Pi Imager.
 
 Project improvements:
 
