@@ -29,7 +29,11 @@ $ chmod +x retropie_setup.sh
 \begin{lstlisting}[language=bash, breaklines=true, breakatwhitespace=true, columns=fullflexible]
 $ sudo ./retropie_setup.sh
 \end{lstlisting}
-Navigate through the setup: OK → OK → Basic install → Yes. The installation process will take a while. After completion, navigate to Configuration / tools → autostart → Start EmulationStation at boot → OK → bashwelcometweak → Install Bash Welcom Tweak → OK → Exit.
+Follow the prompts: OK → OK → Basic Install → Yes. The installation will take a while.
+
+Once complete, go to Configuration / tools → autostart → Start EmulationStation at boot → OK.
+
+Then, go to bashwelcometweak → Install Bash Welcome Tweak → OK → Exit.
 
 \item Reboot the system:
 \begin{lstlisting}[language=bash, breaklines=true, breakatwhitespace=true, columns=fullflexible]
@@ -37,35 +41,47 @@ $ sudo reboot
 \end{lstlisting}
 
 \item Setup the keyboard:  
-\begin{itemize}
-    \item \textbf{D-PAD UP} → Arrow Up  
-    \item \textbf{D-PAD DOWN} → Arrow Down  
-    \item \textbf{D-PAD LEFT} → Arrow Left  
-    \item \textbf{D-PAD RIGHT} → Arrow Right  
-    \item \textbf{START} → Enter  
-    \item \textbf{SELECT} → Tab  
-    \item \textbf{BUTTON A / EAST} → Spacebar  
-    \item \textbf{BUTTON B / SOUTH} → Left Shift  
-    \item \textbf{BUTTON X / NORTH} → Z  
-    \item \textbf{BUTTON Y / WEST} → X  
-    \item \textbf{LEFT SHOULDER} → Q  
-    \item \textbf{RIGHT SHOULDER} → E  
-    \item \textbf{LEFT TRIGGER} → R  
-    \item \textbf{RIGHT TRIGGER} → T  
-    \item \textbf{LEFT THUMB} → C  
-    \item \textbf{RIGHT THUMB} → V  
-    \item \textbf{LEFT ANALOG UP} → W  
-    \item \textbf{LEFT ANALOG DOWN} → S  
-    \item \textbf{LEFT ANALOG LEFT} → A  
-    \item \textbf{LEFT ANALOG RIGHT} → D  
-    \item \textbf{RIGHT ANALOG UP} → I  
-    \item \textbf{RIGHT ANALOG DOWN} → K  
-    \item \textbf{RIGHT ANALOG LEFT} → J  
-    \item \textbf{RIGHT ANALOG RIGHT} → L  
-    \item \textbf{HOTKEY ENABLE} → Left Control (Ctrl)  
-\end{itemize}
+\begin{table}[H]
+\centering
+\begin{tabular}{|l|l|}
+\hline
+\textbf{Gamepad Input} & \textbf{Keyboard Key} \\
+\hline
+D-PAD UP & Arrow Up \\
+D-PAD DOWN & Arrow Down \\
+D-PAD LEFT & Arrow Left \\
+D-PAD RIGHT & Arrow Right \\
+\hline
+START & Enter \\
+SELECT & Tab \\
+BUTTON A / EAST & Spacebar \\
+BUTTON B / SOUTH & Left Shift \\
+BUTTON X / NORTH & Z \\
+BUTTON Y / WEST & X \\
+\hline
+LEFT SHOULDER & Q \\
+RIGHT SHOULDER & E \\
+LEFT TRIGGER & R \\
+RIGHT TRIGGER & T \\
+LEFT THUMB & C \\
+RIGHT THUMB & V \\
+\hline
+LEFT ANALOG UP & W \\
+LEFT ANALOG DOWN & S \\
+LEFT ANALOG LEFT & A \\
+LEFT ANALOG RIGHT & D \\
+RIGHT ANALOG UP & I \\
+RIGHT ANALOG DOWN & K \\
+RIGHT ANALOG LEFT & J \\
+RIGHT ANALOG RIGHT & L \\
+\hline
+HOTKEY ENABLE & Left Control (Ctrl) \\
+\hline
+\end{tabular}
+\caption{Suggested keyboard mapping for RetroPie}
+\end{table}
 
-\item Configure Raspberry Pi settings in Retropie menu in the RASPI-CONFIG option:
+\item Configure Raspberry Pi settings in RetroPie menu in the RASPI-CONFIG option:
 \begin{itemize}
 \item System Options → Hostname → Enter a hostname
 \item System Options → Password → Enter a new password → OK
@@ -74,21 +90,17 @@ $ sudo reboot
 \item Interface Options → SSH → Yes
 \end{itemize}
 
-\item Select WIFI option in the Retropie menu → Connect to WiFi network → Pick network and enter the password
+\item Select WIFI option in the RetroPie menu → Connect to WiFi network → Pick network and enter the password
 
-\item Download ROMs for prefered games on a different device. ROMs can be downloaded from \href{https://www.emulatorgames.net}{\textbf{\color{blue}emulatorgames.net}} and \href{https://www.romsgames.net}{\textbf{\color{blue}romsgames.net}}. Reference supported systems at \href{https://retropie.org.uk/docs/Supported-Systems/}{\textbf{\color{blue}RetroPie Supported Systems}} before downloading the games to make sure that it will work.
+\item Download ROMs for your preferred games using another device. ROMs can be downloaded from \href{https://www.emulatorgames.net}{\textbf{\color{blue}emulatorgames.net}} and \href{https://www.romsgames.net}{\textbf{\color{blue}romsgames.net}}. Check the list of \href{https://retropie.org.uk/docs/Supported-Systems/}{\textbf{\color{blue}RetroPie Supported Systems}} to ensure game compatibility before downloading.
 
-\item In the Retropie menu select SHOW IP. Transfer ROMs to RetroPie using SCP from the device with ROMs:
+\item In the RetroPie menu select SHOW IP. Transfer ROMs to the Raspberry Pi using SCP from the device where the ROMs are stored.
 \begin{lstlisting}[language=bash, breaklines=true, breakatwhitespace=true, columns=fullflexible]
 $ scp -r <PATH_TO_ROMS_DIRECTORY>/* <USERNAME>@<RASPBERRY_PI_IP>:~/RetroPie/roms/
 \end{lstlisting} 
 
-\item Move ROMs on the Raspberry Pi to their needed directories
-Pressing \textbf{F4} will take you to the command line interface (CLI). To return to EmulationStation, enter:
-\begin{lstlisting}[language=bash, breaklines=true, breakatwhitespace=true, columns=fullflexible]
-$ emulationstation
-\end{lstlisting}
-ROMs must be placed in their respective emulator directories, e.g., \texttt{~/RetroPie/roms/psx} for PlayStation games. Use cd command to move ROMs to the needed location.
+\item Organize the ROMs into their appropriate emulator folders on the Raspberry Pi.
+Pressing \textbf{F4} will take you to the command line interface (CLI). For example, PlayStation games should go into \texttt{~/RetroPie/roms/psx}. Use \texttt{cd} command to move ROMs to the needed location. To return to EmulationStation use the \texttt{emulationstation} command.
 
 \item Personalize game lists in the MAIN MENU:
 \begin{itemize}
@@ -96,7 +108,7 @@ ROMs must be placed in their respective emulator directories, e.g., \texttt{~/Re
 \item SCRAPER → SCRAPE FROM → SCREENSCRAPER → SCRAPE NOW → Set SYSTEMS to all → set USER DECIDES ON CONFLICTS to off → Start
 \end{itemize}
 
-\item Now you can play the games. Use hotkeys while playing:
+\item Now you can play the games. If desired, use these hotkeys while playing:
 \begin{itemize}
 \item \textbf{HOTKEY + Start}: Exit game
 \item \textbf{HOTKEY + Right Shoulder}: Save game
@@ -106,21 +118,21 @@ ROMs must be placed in their respective emulator directories, e.g., \texttt{~/Re
 \item \textbf{HOTKEY + Button X}: Open RetroArch menu
 \end{itemize}
 
+\end{enumerate}
+
+\vspace{0.5cm}
+
 \noindent \textbf{Optional Enhancements:}
 \begin{itemize}
 
-\item Enable cheats: Open RetroArch menu (HOTKEY + Button X) → Settings → User Interface → set Show Advanced Settings to ON → Go back to User Interface → Menu Item Visibility → set Show 'Online Updater' to ON → Go back to Main menu of RetroArch → Online Updater → Update Cheats → Go back to the Main menu of RetroArch → Quick Menu → Cheats → Load Cheat File (Replace) → Select console → Turn ON the wanted cheets by selecting the cheet and setting Enable to ON → Apply Changes
+\item Enable cheats: Open RetroArch menu (HOTKEY + Button X) → Settings → User Interface → set Show Advanced Settings to ON → Go back to User Interface → Menu Item Visibility → set Show 'Online Updater' to ON → Go back to Main menu of RetroArch → Online Updater → Update Cheats → Go back to the Main menu of RetroArch → Quick Menu → Cheats → Load Cheat File (Replace) → Select console → Turn ON the desired cheats by selecting each one and setting Enable to ON → Apply Changes.
 
 \item Enable achievements:
 \begin{enumerate}
-\item Register at \href{https://retroachievements.org}{\textbf{\color{blue}RetroAchievements}}
-\item Open the game in which you would like to turn on the achievements
-\item Open RetroArch menu (HOTKEY + Button X) → Settings → Achievements → Turn it ON → Select Username and put in value → Select Password and put in value → set Unlock Sound to ON
-\item Go back to Main menu of RetroArch → Configuration File → Save Current Configuration → Quit RetroArch
+\item Sign up at \href{https://retroachievements.org}{\textbf{\color{blue}RetroAchievements}}.
+\item Open the game on the Raspberry Pi in which you would like to turn on the achievements.
+\item Open RetroArch menu (HOTKEY + Button X) → Settings → Achievements → Turn it ON → Select Username and put in value → Select Password and put in value → set Unlock Sound to ON.
+\item Go back to Main menu of RetroArch → Configuration File → Save Current Configuration → Quit RetroArch.
 \end{enumerate}
 
 \end{itemize}
-
-\end{enumerate}
-
-
